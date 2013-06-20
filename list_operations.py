@@ -152,14 +152,14 @@ input_list.insert(index, value)
     
     if length_list == index:                 # if list is empty or at the end
         custom_append(input_list,value)
-    elif index == 0:                           
+    elif index == 0:                         # if index is at the beginning  
          add_value = [value]
-         input_list = add_value + input_list
+         input_list[::] = add_value + input_list
     else:                                      # if index is the middle of the list
         first_half_list = input_list[:index]
         second_half_list = input_list[index:]
         add_list= [value]       
-        input_list = first_half_list + add_list + second_half_list
+        input_list[::] = first_half_list + add_list + second_half_list
 
     return input_list
 

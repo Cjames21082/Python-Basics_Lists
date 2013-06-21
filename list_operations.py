@@ -56,7 +56,7 @@ def inner_four_end(input_list):
     """Return the sixth, fifth, fourth, and third elements from the end of the
 list, in that order.
 """
-    return input_list[5:1:-1]
+    return input_list[-6:-2:1]
 
 def replace_head(input_list):
     """Replace the head of the input list with the value 42."""
@@ -75,19 +75,15 @@ def replace_middle(input_list):
     """Replace all elements of the input list with the the values 42 and 37, in
 that order, except for the first two and last two elements.
 """
-    value = [37,42]
+    value = [42,37]
     input_list[2:-2]= value
     return input_list
 
 def delete_third_and_seventh(input_list):
     """Remove the third and seventh elements of the input list."""
-    if len(input_list) >= 7:
-        input_list.pop(6)
-        input_list.pop(2)
-    elif len(input_list)>= 3:
-        input_list.pop(2)
-    else:
-        input_list
+    
+    del input_list[6]
+    del input_list[2]
 
     return input_list
 
@@ -95,9 +91,8 @@ def delete_middle(input_list):
     """Remove all elements from the input list except for the first two and the
 last two.
 """
-    while len(input_list) >= 5:
-        input_list.pop(2)
-    
+    del input_list[2:-2]
+
     return input_list
 
 """
@@ -147,6 +142,7 @@ def custom_insert(input_list, index, value):
     """custom_insert(input_list, index, value) imitates
 input_list.insert(index, value)
 """
+    """ one option. not so efficient
     length_list = custom_len(input_list)
 
     
@@ -161,35 +157,115 @@ input_list.insert(index, value)
         add_list= [value]       
         input_list[::] = first_half_list + add_list + second_half_list
 
+    return input_list"""
+
+    input_list[index:index] = [value]
+
     return input_list
+
 
 def custom_remove(input_list, value):
     """custom_remove(input_list, value) imitates input_list.remove(value)"""
-    pass
+    element_index = 0
+
+    if input_list != []:
+        for element in input_list:
+            if input_list[element_index] == value:
+                del input_list[element_index]
+                break
+            else:
+                element_index += 1
+    return input_list 
 
 def custom_pop(input_list):
     """custom_pop(input_list) imitates input_list.pop()"""
-    pass
+    if input_list != []:
+        save_me = input_list[-1]
+        del input_list[-1]
+    return save_me
 
 def custom_index(input_list, value):
     """custom_index(input_list, value) imitates input_list.index(value)"""
-    pass
+    
+    element_index = 0
+    
+    if input_list != []:
+        for el in input_list:
+            if input_list[element_index] == value:
+                found_it = element_index
+                break
+            elif (custom_len(input_list) - 1) == element_index:
+                found_it =  "This was not found"
+            else:
+                element_index += 1
+
+    
+
+    return found_it
 
 def custom_count(input_list, value):
     """custom_count(input_list, value) imitates input_list.count(value)"""
-    pass
+    element_index = 0
+    counter = 0
+
+    for element in input_list: 
+        if input_list[element_index] == value:
+            counter += 1
+            element_index += 1
+        else:
+            element_index += 1
+
+    return counter
+
 
 def custom_reverse(input_list):
     """custom_reverse(input_list) imitates input_list.reverse()"""
-    pass
+
+    """new_list = []
+
+    while input_list != []:
+        a = custom_pop(input_list)
+        custom_append(new_list, a)
+
+    input_list[::] = new_list
+
+    return input_list"""
+
+    input_list[::] = input_list[::-1]
+
+    return input_list
+
 
 def custom_contains(input_list, value):
     """custom_contains(input_list, value) imitates (value in input_list)"""
-    pass
+
+    true_or_false = False
+
+    for el in input_list:
+        if el == value:
+            true_or_false = True
+            break
+
+    return true_or_false
 
 def custom_equality(some_list, another_list):
     """custom_equality(some_list, another_list) imitates
 (some_list == another_list)
 """
-    pass
+    compare_list = True
+    index_counter = 0
+    
+    if custom_len(some_list) != custom_len(another_list):
+        compare_list = False
+    else: 
+        while compare_list and (index_counter < custom_len(some_list)):
+            if some_list[index_counter] == another_list[index_counter]:
+                index_counter += 1
+            else:
+                compare_list = False
+
+    return compare_list
+
+
+
 

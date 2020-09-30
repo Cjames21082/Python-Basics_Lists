@@ -1,4 +1,4 @@
-Cirriculum: Learn Python the hard way(http://learnpythonthehardway.org/book/)
+# Best Cirriculum: Learn Python the hard way(http://learnpythonthehardway.org/book/)
 
 
 Lessons Practiced:
